@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ReUseableImageAsset extends StatelessWidget {
-  ReUseableImageAsset({this.assetImage, this.loadType, this.example});
+  const ReUseableImageAsset({
+    super.key,
+    required this.assetImage,
+    required this.loadType,
+    required this.example,
+  });
 
   final AssetImage assetImage;
   final String loadType;
@@ -11,7 +16,7 @@ class ReUseableImageAsset extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(15.0)),
         image: DecorationImage(
           image: assetImage,
           fit: BoxFit.cover,
@@ -22,12 +27,12 @@ class ReUseableImageAsset extends StatelessWidget {
       child:Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(loadType, style: TextStyle(fontFamily: 'Nunito',
+          Text(loadType, style: const TextStyle(fontFamily: 'Nunito',
               fontWeight: FontWeight.w700 ,color: Colors.white,fontSize: 21.0) ,),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(example,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13.0,
                 fontFamily: 'Nunito',
                 fontWeight: FontWeight.w400,

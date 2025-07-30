@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<Offset> _animation;
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 4),
+      duration: const Duration(seconds: 4),
       vsync: this,
     )..repeat(reverse: true);
 
     _animation = Tween<Offset>(
       begin: Offset.zero,
-      end: Offset(1.5, 0.0),
+      end: const Offset(1.5, 0.0),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticIn));
 
     _controller.forward();
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Icon(
+        floatingActionButton: const Icon(
           Icons.add,
           color: Colors.white,
         ),
@@ -46,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
         body: Center(
           child: SlideTransition(
             position: _animation,
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 'Power Calculator',

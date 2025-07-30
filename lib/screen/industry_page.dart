@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_calc/model/constants.dart';
 
 class IndustryPage extends StatefulWidget {
+  const IndustryPage({super.key});
+
   @override
   _IndustryPageState createState() => _IndustryPageState();
 }

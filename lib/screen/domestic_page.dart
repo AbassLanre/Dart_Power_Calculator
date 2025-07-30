@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:power_calc/model/constants.dart';
 
 class DomesticPage extends StatefulWidget {
+  const DomesticPage({super.key});
+
   @override
   _DomesticPageState createState() => _DomesticPageState();
 }

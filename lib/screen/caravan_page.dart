@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_calc/model/constants.dart';
 
 class CaravanPage extends StatefulWidget {
+  const CaravanPage({super.key});
+
   @override
   _CaravanPageState createState() => _CaravanPageState();
 }

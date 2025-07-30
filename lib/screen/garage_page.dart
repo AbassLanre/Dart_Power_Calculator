@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_calc/model/constants.dart';
 
 class GardenPage extends StatefulWidget {
+  const GardenPage({super.key});
+
   @override
   _GardenPageState createState() => _GardenPageState();
 }

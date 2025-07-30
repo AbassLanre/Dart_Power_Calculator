@@ -9,6 +9,8 @@ import 'package:power_calc/utilities/style_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -17,12 +19,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    _launchUrl()async{
-      const url='https://stagengineering.com/contact-us/';
-      if(await canLaunch(Uri.encodeFull(url))){
-        await launch(Uri.encodeFull(url));
-      }else{
-        throw 'Could not launch $url';
+    _launchUrl() async {
+      final Uri url = Uri.parse('https://stagengineering.com/contact-us/');
+      if (!await launchUrl(url)) {
+        throw Exception('Could not launch $url');
       }
     }
 
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return DomesticPage();
+                return const DomesticPage();
               }));
             },
           ),
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return IndustryPage();
+                return const IndustryPage();
               }));
             },
           ),
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return CaravanPage();
+                return const CaravanPage();
               }));
             },
           ),
@@ -78,11 +78,11 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return GardenPage();
+                return const GardenPage();
               }));
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 50.0,
           ),
           ListTile(
@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.black),
           child:  Drawer(
+            backgroundColor: Colors.black,
             child: SafeArea(
               child: listViewWidget,
             ),
@@ -203,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                          return DomesticPage();
+                                          return const DomesticPage();
                                         },
                                       ),
                                     );
@@ -230,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                          return IndustryPage();
+                                          return const IndustryPage();
                                         },
                                       ),
                                     );
@@ -267,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                          return CaravanPage();
+                                          return const CaravanPage();
                                         },
                                       ),
                                     );
@@ -294,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                          return GardenPage();
+                                          return const GardenPage();
                                         },
                                       ),
                                     );

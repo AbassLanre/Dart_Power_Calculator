@@ -6,14 +6,16 @@ import 'package:power_calc/utilities/rounded_button.dart';
 import 'package:power_calc/utilities/style_constants.dart';
 
 class ScreenPage extends StatefulWidget {
-  ScreenPage(
-      {this.heroTag,
-      this.imageName,
-      this.loadName,
-      this.power,
-      this.sliverName,
-      this.gadget,
-      this.position});
+  const ScreenPage({
+    super.key,
+    required this.heroTag,
+    required this.imageName,
+    required this.loadName,
+    required this.power,
+    required this.sliverName,
+    required this.gadget,
+    required this.position,
+  });
 
   final String loadName;
   final String power;
@@ -24,13 +26,13 @@ class ScreenPage extends StatefulWidget {
   final int position;
 
   @override
-  _ScreenPageState createState() => _ScreenPageState();
+  State<ScreenPage> createState() => _ScreenPageState();
 }
 
 class _ScreenPageState extends State<ScreenPage> {
   bool showSpinner = false;
 
-  Future<String> theData;
+  late Future<String> theData;
 
   Future<String> _checkData() async {
     return await DefaultAssetBundle.of(context)
@@ -46,7 +48,7 @@ class _ScreenPageState extends State<ScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<TextEditingController> textEditingController = List();
+    List<TextEditingController> textEditingController = <TextEditingController>[];
 
     //
     // List<String> controllerValues=List();
@@ -60,7 +62,9 @@ class _ScreenPageState extends State<ScreenPage> {
         future: theData,
         builder: (context, snapshot) {
           List newData = json.decode(snapshot.data.toString());
-          Widget domesticListSliver;
+          Widget domesticListSliver = const SliverToBoxAdapter(
+            child: Center(child: CircularProgressIndicator()),
+          );
           Widget sliverButton = SliverFillRemaining(
             hasScrollBody: false,
             child: Wrap(
@@ -77,8 +81,7 @@ class _ScreenPageState extends State<ScreenPage> {
                                       [widget.power]
                                   .length;
                           i++) {
-                        if (textEditingController[i].text == null ||
-                            textEditingController[i].text.isEmpty) {
+                        if (textEditingController[i].text.isEmpty) {
                           textEditingController[i].text = 0.toString();
                         } else {
                           additionResult = additionResult +
@@ -103,7 +106,7 @@ class _ScreenPageState extends State<ScreenPage> {
               ],
             ),
           );
-          if (snapshot.hasData && newData != null) {
+          if (snapshot.hasData) {
             value=0.0;
             print('hasData');
             domesticListSliver = SliverList(
@@ -160,7 +163,7 @@ class _ScreenPageState extends State<ScreenPage> {
                     childCount: newData[widget.position][widget.loadName][0]
                             [widget.gadget]
                         .length));
-          } else if (snapshot.hasError || newData == null) {
+          } else {
             value=1.0;
             print('NoData');
             domesticListSliver = SliverList(
@@ -176,11 +179,10 @@ class _ScreenPageState extends State<ScreenPage> {
               }),
             );
           }
-          return Container(
-            child: CupertinoPageScaffold(
+          return CupertinoPageScaffold(
               backgroundColor: Colors.black,
               child: CustomScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 slivers: [
                   SliverAppBar(
                     backgroundColor: Colors.black,
@@ -192,6 +194,7 @@ class _ScreenPageState extends State<ScreenPage> {
                       title: Text(widget.sliverName,style: TextStyle(
                         fontFamily: 'Nunito',
                         fontWeight: FontWeight.w700,
+                        color: Colors.white
                       ),),
                       background: Hero(
                         tag: widget.heroTag,
@@ -202,7 +205,7 @@ class _ScreenPageState extends State<ScreenPage> {
                       ),
                     ),
                   ),
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: SizedBox(
                       height: 8.0,
                     ),
@@ -211,8 +214,7 @@ class _ScreenPageState extends State<ScreenPage> {
                   sliverButton,
                 ],
               ),
-            ),
-          );
+            );
         });
   }
 }
@@ -223,12 +225,11 @@ void alertBox(BuildContext context, String multiplicationResult) {
       fontFamily: 'Nunito',
       fontWeight: FontWeight.w700,
     ),),
-    content: Container(
-      child: Row(
+    content: Row(
         children: [
           Flexible(child: Text('Required generator power rating: ',
             style: kAlertDialogBox,)),
-          SizedBox(
+          const SizedBox(
             width: 20.0,
           ),
           Flexible(child: Text(
@@ -237,10 +238,10 @@ void alertBox(BuildContext context, String multiplicationResult) {
           ),
         ],
       ),
-    ),
     actions: <Widget>[
-      FlatButton(
-          onPressed: () => Navigator.of(context).pop(), child: Text("OK"))
+      TextButton(
+          onPressed: () => Navigator.of(context).pop(), 
+          child: const Text("OK"))
     ],
   );
   showDialog(

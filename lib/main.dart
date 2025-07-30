@@ -16,7 +16,7 @@ void main() {
       duration: 200,
       splashIconSize: 300.0,
       splash: 'images/logo.jpg',
-      nextScreen: HomePage(),
+      nextScreen: const HomePage(),
       splashTransition: SplashTransition.slideTransition,
     ) ,
     
