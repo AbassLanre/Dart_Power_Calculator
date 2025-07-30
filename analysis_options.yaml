@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+
+# Additional rules can be customized here
+linter:
+  rules:
+    # Disable any rules that may be too strict for this project
+    prefer_const_constructors: false
+    avoid_print: false
